@@ -67,4 +67,4 @@ docker run -d --name kong-ee --network=kong-ee-net \
      http://localhost:8002
 
 ```
-__ We are all set __
+**We are all set**
