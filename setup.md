@@ -13,7 +13,7 @@ docker images
 
 docker tag <IMAGE_ID> kong-ee
 
-docker network create kong-ee
+docker network create kong-ee-net
 ```  
 2. Setup and run PostgreSQL
 
