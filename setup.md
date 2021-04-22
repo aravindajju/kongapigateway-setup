@@ -76,7 +76,7 @@ Setting up an API would require setting up of a Service (proxy on top of an actu
 1. Create a service called 'mock_service'
 ```
 curl -i -X POST http://localhost:8001/services \
-  --data name=example_service \
+  --data name=mock_service \
   --data url='http://mockbin.org'
 ```
 2. Create a route
@@ -92,3 +92,45 @@ curl -i -X POST http://localhost:8001/services/mock_service/routes \
 curl -i -X GET http://localhost:8000/mock/request
 curl -i -X GET http://mockbin.org/request
 ```
+### Securing the API
+
+Next step is to secure the API with a token.  So only authorized clients can use the API
+
+1. Enable key based authentication plugin on 'mocking' route
+```
+curl -X POST http://localhost:8001/routes/mocking/plugins \
+  --data name=key-auth
+
+
+curl -i http://localhost:8000/mock
+```
+2.
+
+```
+curl -i -X POST http://localhost:8001/consumers/ \
+  --data username=consumer \
+  --data custom_id=consumer
+```
+3.
+```
+curl -i -X POST http://localhost:8001/consumers/consumer/key-auth \
+  --data key=acmdeccan
+  
+```
+4. 
+```
+curl -i http://localhost:8000/mock/request \
+  -H 'apikey:acmdeccan'
+
+
+
+
+
+
+
+
+  
+
+
+
+
