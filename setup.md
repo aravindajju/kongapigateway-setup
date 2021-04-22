@@ -30,7 +30,7 @@ docker run --rm --network=kong-ee-net \
 -e "KONG_DATABASE=postgres" \
 -e "KONG_PG_HOST=kong-ee-database" \
 -e "KONG_PG_PASSWORD=kong" \
--e "KONG_PASSWORD=<SOMETHING-YOU-KNOW>" \
+-e "KONG_PASSWORD=acmdeccan123" \
 kong-ee kong migrations bootstrap
   
 ```
