@@ -5,6 +5,8 @@ Installation of Kong API gateway, requies installation of
  + Setup and Run a database (PostgreSQL)
 
 1. Pull Kong Gateway Docker Image and verify if it is installed.  Create Docker network 
+
+```
     docker pull kong-docker-kong-gateway-docker.bintray.io/kong-enterprise-edition:2.3.3.0-alpine
     
     docker images
@@ -12,9 +14,11 @@ Installation of Kong API gateway, requies installation of
     docker tag <IMAGE_ID> kong-ee
     
     docker network create <image id>
-  
+```  
 2. Setup and run PostgreSQL
-    docker run -d --name kong-ee-database \
+
+```
+  docker run -d --name kong-ee-database \
   --network=kong-ee-net \
   -p 5432:5432 \
   -e "POSTGRES_USER=kong" \
@@ -28,9 +32,11 @@ Installation of Kong API gateway, requies installation of
   -e "KONG_PG_PASSWORD=kong" \
   -e "KONG_PASSWORD=<SOMETHING-YOU-KNOW>" \
   kong-ee kong migrations bootstrap
-
+  
+```
 3. Start the Gateway
 
+```
 docker run -d --name kong-ee --network=kong-ee-net \
   -e "KONG_DATABASE=postgres" \
   -e "KONG_PG_HOST=kong-ee-database" \
@@ -50,13 +56,15 @@ docker run -d --name kong-ee --network=kong-ee-net \
   -p 8003:8003 \
   -p 8004:8004 \
   kong-ee
-
+  
+```
 
 4. Verify if the installation is working fine or not
 
+```
     curl -i -X GET --url http://localhost:8001/services
     
      http://localhost:8002
 
-
-
+```
+__ We are all set __
