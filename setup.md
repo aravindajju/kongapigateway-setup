@@ -68,3 +68,27 @@ http://localhost:8002
 
 ```
 **We are all set**
+
+### Setup an API
+
+Setting up an API would require setting up of a Service (proxy on top of an actual implementation) and a Route to this service. Let us use an existing mocking service from mockbin.org
+
+1. Create a service called 'mock_service'
+```
+curl -i -X POST http://localhost:8001/services \
+  --data name=example_service \
+  --data url='http://mockbin.org'
+```
+2. Create a route
+
+```
+curl -i -X POST http://localhost:8001/services/mock_service/routes \
+  --data 'paths[]=/mock' \
+  --data name=mocking
+```
+3. Verify the APIs
+
+```
+curl -i -X GET http://localhost:8000/mock/request
+curl -i -X GET http://mockbin.org/request
+```
