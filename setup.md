@@ -104,24 +104,40 @@ curl -X POST http://localhost:8001/routes/mocking/plugins \
 
 curl -i http://localhost:8000/mock
 ```
-2.
+2. Once key based authentication is enabled, we need to create a consumer and assign a key
 
 ```
 curl -i -X POST http://localhost:8001/consumers/ \
   --data username=consumer \
   --data custom_id=consumer
-```
-3.
-```
+  
 curl -i -X POST http://localhost:8001/consumers/consumer/key-auth \
   --data key=acmdeccan
   
 ```
-4. 
+3. Let us now test the API again
 ```
 curl -i http://localhost:8000/mock/request \
   -H 'apikey:acmdeccan'
+```
 
+### Rate Limit service
+
+Rate limiting is a mechanism to ensure APIs are used fairly as per the quotas. 
+
+1. Enable rate limiting plug in with 5 requests a minute
+
+```
+curl -i -X POST http://localhost:8001/plugins \
+  --data name=rate-limiting \
+  --data config.minute=5 \
+  --data config.policy=local
+```
+2. Test it 6 times  
+```  
+curl -i -X GET http://localhost:8000/mock/request
+
+```  
 
 
 
